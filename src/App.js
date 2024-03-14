@@ -1,4 +1,4 @@
-import { LoginForm } from './Components/LoginForm/LoginForm';
+import { LoginForm } from './Components/Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Tabla from './Components/Tabla/Tabla';
 
