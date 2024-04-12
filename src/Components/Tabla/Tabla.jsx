@@ -15,7 +15,7 @@ const Tabla = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/');
+      const response = await axios.get('http://localhost:3001/'); // Cambia la ruta a la raíz del servidor
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -36,7 +36,7 @@ const Tabla = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/', formData);
+      await axios.post('http://localhost:3001/', formData); // Cambia la ruta a /api
       setFormData({
         nombre: '',
         sexo: '',
@@ -60,7 +60,7 @@ const Tabla = () => {
   const handleDeleteSelected = async () => {
     try {
       await Promise.all(selectedItems.map(async id => {
-        await axios.delete(`http://localhost:3001/${id}`);
+        await axios.delete(`http://localhost:3001/${id}`); // Cambia la ruta a /api
       }));
       setSelectedItems([]);
       fetchData();
