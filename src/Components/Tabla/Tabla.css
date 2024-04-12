@@ -1,0 +1,33 @@
+/* Estilos para Tabla.jsx */
+body.tabla-background {
+  background-color: #ffffff;
+}
+
+.table-container {
+  margin-bottom: 20px; /* Agregamos un margen inferior para separar la tabla de los botones */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: beige;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px; /* Añade margen en la parte superior */
+}
+
+.button-container button {
+  margin: 10px; /* Añadimos margen entre los botones */
+  padding: 10px;
+}
