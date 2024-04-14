@@ -1,10 +1,9 @@
-/* Estilos para Tabla.jsx */
 body.tabla-background {
   background-color: #ffffff;
 }
 
 .table-container {
-  margin-bottom: 20px; /* Agregamos un margen inferior para separar la tabla de los botones */
+  margin-bottom: 20px;
 }
 
 table {
@@ -24,10 +23,16 @@ tr:nth-child(even) {
 
 .button-container {
   text-align: center;
-  margin-top: 20px; /* Añade margen en la parte superior */
+  margin-top: 20px;
 }
 
 .button-container button {
-  margin: 10px; /* Añadimos margen entre los botones */
+  margin: 10px;
   padding: 10px;
+}
+
+body {
+  background-image: url('./Fondo.jpg');
+  background-size: cover; /* Para que la imagen cubra todo el fondo */
+  background-repeat: no-repeat; /* Para que la imagen no se repita */
 }

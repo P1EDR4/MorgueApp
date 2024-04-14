@@ -12,6 +12,7 @@ const Tabla = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false); // Estado para mostrar/ocultar el formulario de agregar información
 
   const fetchData = async () => {
     try {
@@ -43,6 +44,7 @@ const Tabla = () => {
         seña: '',
         hora: ''
       });
+      setShowAddForm(false); // Oculta el formulario después de agregar información
       fetchData();
     } catch (error) {
       console.error('Error al enviar los datos:', error);
@@ -132,7 +134,16 @@ const Tabla = () => {
           ))}
         </tbody>
       </table>
+      {/* Botones de acciones */}
       <div className="button-container">
+        <button onClick={handleDeleteSelected}>Eliminar Seleccionado</button>
+        <button onClick={handleModifySelected}>Modificar Seleccionado</button>
+        <button onClick={() => setShowAddForm(!showAddForm)}>
+          {showAddForm ? 'Cancelar' : 'Agregar Información'}
+        </button>
+      </div>
+      {/* Formulario de agregar información */}
+      {showAddForm && (
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -164,9 +175,7 @@ const Tabla = () => {
           />
           <button type="submit">Agregar Información</button>
         </form>
-        <button onClick={handleDeleteSelected}>Eliminar Seleccionado</button>
-        <button onClick={handleModifySelected}>Modificar Seleccionado</button>
-      </div>
+      )}
     </div>
   );
 };
