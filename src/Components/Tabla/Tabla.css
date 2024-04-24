@@ -33,6 +33,6 @@ tr:nth-child(even) {
 
 body {
   background-image: url('./Fondo.jpg');
-  background-size: cover; /* Para que la imagen cubra todo el fondo */
-  background-repeat: no-repeat; /* Para que la imagen no se repita */
+  background-size: cover; 
+  background-repeat: no-repeat; 
 }

@@ -1,0 +1,64 @@
+.sidebar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3); /*difuminado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  
+  .toggle-button {
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    justify-content: center;
+    flex-grow: 1;
+  }
+  
+  ul li {
+    margin-right: 20px;
+  }
+  
+  ul li:last-child {
+    margin-right: 0; 
+  }
+  
+  ul li a {
+    padding: 17px 40px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: transparent; 
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+    color: white; /* Color del texto */
+    text-decoration: none; 
+  }
+  
+  ul li a:hover {
+    letter-spacing: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+  }
+  
+  ul li a:active {
+    letter-spacing: 3px;
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white;
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+  }

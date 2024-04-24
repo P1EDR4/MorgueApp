@@ -1,11 +1,14 @@
 import React from 'react';
-
-function Layout({children}) {
+import Sidebar from '../Components/BarraMenu/sidebar';
+function Layout({ children }) {
   return (
-    <div>
-      {children}
+    <div className="container">
+      <Sidebar /> 
+      <div className="content">
+        {children}
+      </div>
     </div>
-  )
+  );
 }
 
 export default Layout;
