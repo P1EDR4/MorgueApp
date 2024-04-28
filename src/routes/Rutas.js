@@ -10,6 +10,7 @@ function Rutas() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Tabla" element={<Tabla />} />
         </Routes>
       </Layout>

@@ -12,11 +12,11 @@ const Tabla = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
-  const [showAddForm, setShowAddForm] = useState(false); // Estado para mostrar/ocultar el formulario de agregar información
+  const [showAddForm, setShowAddForm] = useState(false); 
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api-morgueapp.onrender.com/'); // Cambia la ruta a la raíz del servidor
+      const response = await axios.get('https://api-morgueapp.onrender.com/');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -37,14 +37,14 @@ const Tabla = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('https://api-morgueapp.onrender.com/', formData); // Cambia la ruta a /api
+      await axios.post('https://api-morgueapp.onrender.com/', formData); 
       setFormData({
         nombre: '',
         sexo: '',
         seña: '',
         hora: ''
       });
-      setShowAddForm(false); // Oculta el formulario después de agregar información
+      setShowAddForm(false); 
       fetchData();
     } catch (error) {
       console.error('Error al enviar los datos:', error);
@@ -62,7 +62,7 @@ const Tabla = () => {
   const handleDeleteSelected = async () => {
     try {
       await Promise.all(selectedItems.map(async id => {
-        await axios.delete(`https://api-morgueapp.onrender.com/${id}`); // Cambia la ruta a /api
+        await axios.delete(`https://api-morgueapp.onrender.com/${id}`); 
       }));
       setSelectedItems([]);
       fetchData();

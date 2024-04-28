@@ -6,8 +6,8 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <ul>
-        <li><Link to="/Dashboard">Dashboard</Link></li>
-        <li><Link to="/Tabla">Inicio</Link></li> 
+        <li><Link to="/Dashboard">Panel Principal</Link></li> 
+        <li><Link to="/Tabla">Agregar Información</Link></li> 
         <li><Link to="/perfil">Perfil</Link></li>
       </ul>
     </div>
