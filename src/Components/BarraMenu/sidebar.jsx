@@ -8,7 +8,7 @@ const Sidebar = () => {
       <ul>
         <li><Link to="/Dashboard">Panel Principal</Link></li> 
         <li><Link to="/Tabla">Agregar Información</Link></li> 
-        <li><Link to="/perfil">Perfil</Link></li>
+        <li><Link to="/logout">Cerrar Sesión</Link></li>
       </ul>
     </div>
   );

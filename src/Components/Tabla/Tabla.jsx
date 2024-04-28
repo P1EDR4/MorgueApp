@@ -12,7 +12,7 @@ const Tabla = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
-  const [showAddForm, setShowAddForm] = useState(false); 
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -36,15 +36,26 @@ const Tabla = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (!formData.nombre || !formData.sexo || !formData.seña || !formData.hora) {
+      alert("Los campos están vacíos. Por favor, complete todos los campos.");
+      return; 
+    }
+
+    if (!formData.hora.includes('am') && !formData.hora.includes('pm')) {
+      alert("Por favor, especifique si la hora es 'am' o 'pm'.");
+      return; 
+    }
+
     try {
-      await axios.post('https://api-morgueapp.onrender.com/', formData); 
+      await axios.post('https://api-morgueapp.onrender.com/', formData);
       setFormData({
         nombre: '',
         sexo: '',
         seña: '',
         hora: ''
       });
-      setShowAddForm(false); 
+      setShowAddForm(false);
       fetchData();
     } catch (error) {
       console.error('Error al enviar los datos:', error);
@@ -62,7 +73,7 @@ const Tabla = () => {
   const handleDeleteSelected = async () => {
     try {
       await Promise.all(selectedItems.map(async id => {
-        await axios.delete(`https://api-morgueapp.onrender.com/${id}`); 
+        await axios.delete(`https://api-morgueapp.onrender.com/${id}`);
       }));
       setSelectedItems([]);
       fetchData();
@@ -100,12 +111,66 @@ const Tabla = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-      />
+      <div className="button-search-container">
+        <div className="group">
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="tabla-icon">
+            <g>
+              <path
+                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+              ></path>
+            </g>
+          </svg>
+          <input
+            className="input"
+            type="search"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="button-container">
+          <button onClick={() => setShowAddForm(!showAddForm)}>
+            {showAddForm ? 'Cancelar' : 'Agregar Información'}
+          </button>
+          <button onClick={handleModifySelected}>Modificar Seleccionado</button>
+          <button onClick={handleDeleteSelected}>Eliminar Seleccionado</button>
+        </div>
+      </div>
+      {showAddForm && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+          />
+          <select
+            name="sexo"
+            value={formData.sexo}
+            onChange={handleChange}
+          >
+            <option value="">Sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+          <input
+            type="text"
+            name="seña"
+            placeholder="Seña particular"
+            value={formData.seña}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="hora"
+            placeholder="Hora de entrada (am/pm)"
+            value={formData.hora}
+            onChange={handleChange}
+          />
+          <button type="submit">Agregar Información</button>
+        </form>
+      )}
       <table>
         <thead>
           <tr>
@@ -134,48 +199,6 @@ const Tabla = () => {
           ))}
         </tbody>
       </table>
-      {/* Botones de acciones */}
-      <div className="button-container">
-        <button onClick={handleDeleteSelected}>Eliminar Seleccionado</button>
-        <button onClick={handleModifySelected}>Modificar Seleccionado</button>
-        <button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? 'Cancelar' : 'Agregar Información'}
-        </button>
-      </div>
-      {/* Formulario de agregar información */}
-      {showAddForm && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="sexo"
-            placeholder="Sexo"
-            value={formData.sexo}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="seña"
-            placeholder="Seña particular"
-            value={formData.seña}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="hora"
-            placeholder="Hora de entrada"
-            value={formData.hora}
-            onChange={handleChange}
-          />
-          <button type="submit">Agregar Información</button>
-        </form>
-      )}
     </div>
   );
 };
