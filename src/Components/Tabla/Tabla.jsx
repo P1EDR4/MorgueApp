@@ -20,7 +20,7 @@ const Tabla = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api-morgueapp.onrender.com/');
+      const response = await axios.get('https://api-morgueapp.onrender.com');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
