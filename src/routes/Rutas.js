@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import Dashboard from '../Components/Dashboard/Dashboard.jsx';
 import Tabla from '../Components/Tabla/Tabla.jsx';
-import Sidebar from '../Components/BarraMenu/Sidebar.jsx';
+import Sidebar from '../Components/BarraMenu/sidebar.jsx';
 
 
 function Rutas({ onLogout }) {
