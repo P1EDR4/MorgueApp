@@ -3,11 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import Dashboard from '../Components/Dashboard/Dashboard.jsx';
 import Tabla from '../Components/Tabla/Tabla.jsx';
+import Sidebar from '../Components/BarraMenu/Sidebar.jsx';
 
-function Rutas() {
+
+function Rutas({ onLogout }) {
   return (
     <Router>
       <Layout>
+        <Sidebar onLogout={onLogout} /> 
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/Dashboard" element={<Dashboard />} />
@@ -19,3 +22,4 @@ function Rutas() {
 }
 
 export default Rutas;
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from '../Components/BarraMenu/sidebar';
+import Sidebar from '../Components/BarraMenu/Sidebar';
 function Layout({ children }) {
   return (
     <div className="container">
