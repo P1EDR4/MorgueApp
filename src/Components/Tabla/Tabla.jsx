@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { GoTriangleLeft, GoTriangleRight } from 'react-icons/go';
 import './Tabla.css';
 
 const Tabla = () => {
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
     nombre: '',
+    apellidos: '',
     sexo: '',
     seña: '',
     hora: ''
@@ -13,6 +15,8 @@ const Tabla = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   const fetchData = async () => {
     try {
@@ -37,7 +41,7 @@ const Tabla = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!formData.nombre || !formData.sexo || !formData.seña || !formData.hora) {
+    if (!formData.nombre || !formData.apellidos || !formData.sexo || !formData.seña || !formData.hora) {
       alert("Los campos están vacíos. Por favor, complete todos los campos.");
       return; 
     }
@@ -48,9 +52,11 @@ const Tabla = () => {
     }
 
     try {
-      await axios.post('https://api-morgueapp.onrender.com/', formData);
+      const selectedItemID = selectedItems[0];
+      await axios.put(`https://api-morgueapp.onrender.com/${selectedItemID}`, formData);
       setFormData({
         nombre: '',
+        apellidos: '',
         sexo: '',
         seña: '',
         hora: ''
@@ -96,18 +102,40 @@ const Tabla = () => {
       }
       setFormData({
         nombre: selectedItem.nombre,
+        apellidos: selectedItem.apellidos,
         sexo: selectedItem.sexo,
         seña: selectedItem.seña,
         hora: selectedItem.hora
       });
+      setShowAddForm(true);
     } catch (error) {
       console.error('Error al modificar elemento:', error);
     }
   };
 
-  const filteredData = data.filter(item =>
-    item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSearchChange = e => {
+    setSearchTerm(e.target.value);
+  };
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const currentPageNumber = Math.min(currentPage, totalPages);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.filter(item =>
+    item.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.apellidos.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.hora.toLowerCase().includes(searchTerm.toLowerCase())
+  ).slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div>
@@ -125,7 +153,7 @@ const Tabla = () => {
             type="search"
             placeholder="Buscar..."
             value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
+            onChange={handleSearchChange}
           />
         </div>
         <div className="button-container">
@@ -143,6 +171,13 @@ const Tabla = () => {
             name="nombre"
             placeholder="Nombre"
             value={formData.nombre}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="apellidos"
+            placeholder="Apellidos"
+            value={formData.apellidos}
             onChange={handleChange}
           />
           <select
@@ -176,13 +211,14 @@ const Tabla = () => {
           <tr>
             <th>Seleccionar</th>
             <th>Nombre</th>
+            <th>Apellidos</th>
             <th>Sexo</th>
             <th>Seña particular</th>
             <th>Hora de entrada</th>
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((item, index) => (
+          {currentItems.map((item, index) => (
             <tr key={index}>
               <td>
                 <input
@@ -192,6 +228,7 @@ const Tabla = () => {
                 />
               </td>
               <td>{item.nombre}</td>
+              <td>{item.apellidos}</td>
               <td>{item.sexo}</td>
               <td>{item.seña}</td>
               <td>{item.hora}</td>
@@ -199,6 +236,19 @@ const Tabla = () => {
           ))}
         </tbody>
       </table>
+      <div>
+        <GoTriangleLeft
+          className="icon-left"
+          onClick={prevPage}
+          disabled={currentPage === 1}
+        />
+        <GoTriangleRight
+          className="icon-right"
+          onClick={nextPage}
+          disabled={indexOfLastItem >= data.length}
+        />
+        <div className="page-info">Página {currentPageNumber} de {totalPages}</div>
+      </div>
     </div>
   );
 };

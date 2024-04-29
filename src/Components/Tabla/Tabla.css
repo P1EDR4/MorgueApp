@@ -90,3 +90,13 @@ body {
   width: 1rem;
   height: 1rem;
 }
+.icon-left,
+.icon-right {
+  font-size: 30px; 
+  color: #fafafa;
+}
+.page-info {
+  font-size: 18px;
+  color: #ffffff; 
+  text-align: right;
+}
