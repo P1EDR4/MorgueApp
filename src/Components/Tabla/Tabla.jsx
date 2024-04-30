@@ -12,15 +12,16 @@ const Tabla = () => {
     seña: '',
     hora: ''
   });
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [modifyData, setModifyData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 8;
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api-morgueapp.onrender.com');
+      const response = await axios.get('https://api-morgueapp.onrender.com/');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -52,8 +53,12 @@ const Tabla = () => {
     }
 
     try {
-      const selectedItemID = selectedItems[0];
-      await axios.put(`https://api-morgueapp.onrender.com/${selectedItemID}`, formData);
+      if (modifyData) {
+        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, formData);
+        setModifyData(null);
+      } else {
+        await axios.post('https://api-morgueapp.onrender.com/', formData);
+      }
       setFormData({
         nombre: '',
         apellidos: '',
@@ -107,6 +112,7 @@ const Tabla = () => {
         seña: selectedItem.seña,
         hora: selectedItem.hora
       });
+      setModifyData(selectedItem);
       setShowAddForm(true);
     } catch (error) {
       console.error('Error al modificar elemento:', error);
