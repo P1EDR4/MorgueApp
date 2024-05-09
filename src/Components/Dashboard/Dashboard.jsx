@@ -38,7 +38,7 @@ const Dashboard = () => {
         <span className="title">Bienvenido a MorgueApp</span>
         <div>
         </div>
-        <p>Total de información: {totalInfo}</p>
+        <p>Total de Pacientes: {totalInfo}</p>
       </div>
       <Clock />
     </div>
