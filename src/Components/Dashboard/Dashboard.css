@@ -10,8 +10,8 @@ body.dashboard-background {
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el contenido verticalmente */
-    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center;
+    justify-content: center; 
   }
   
   .info-container::before,
@@ -23,32 +23,32 @@ body.dashboard-background {
   
   .info-container::before {
     border-radius: 50%;
-    width: 10rem; /* Ajusta el tamaño del círculo */
-    height: 10rem; /* Ajusta el tamaño del círculo */
-    top: 25%; /* Ajusta la posición vertical del círculo */
-    right: 5%; /* Ajusta la posición horizontal del círculo */
+    width: 10rem; 
+    height: 10rem; 
+    top: 25%; 
+    right: 5%; 
   }
   
   .info-container::after {
     content: "";
     position: absolute;
-    height: 5rem; /* Ajusta la altura del rectángulo */
-    top: 6%; /* Ajusta la posición vertical del rectángulo */
-    right: 3%; /* Ajusta la posición horizontal del rectángulo */
+    height: 5rem; 
+    top: 6%; 
+    right: 3%; 
     border: 1px solid;
   }
   
   .info-box {
-    width: 24em; /* Ajusta el ancho del contenedor */
-    height: 25em; /* Ajusta la altura del contenedor */
-    padding: 2rem; /* Ajusta el espaciado interno */
+    width: 24em; 
+    height: 25em; 
+    padding: 2rem; 
     background-color: rgba(255, 255, 255, 0.074);
     border: 1px solid rgba(255, 255, 255, 0.222);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    border-radius: 1rem; /* Ajusta el radio de borde */
+    border-radius: 1rem; 
     transition: all ease 0.3s;
-    text-align: center; /* Centra el texto horizontalmente */
+    text-align: center; 
   }
   
   .info-box {
@@ -58,31 +58,31 @@ body.dashboard-background {
   }
   
   .info-box .title {
-    font-size: 3rem; /* Ajusta el tamaño del título */
+    font-size: 3rem; 
     font-weight: 500;
     letter-spacing: 0.1em;
   }
   
   .info-box div strong {
     display: block;
-    margin-bottom: 1rem; /* Ajusta el espacio después de cada elemento */
+    margin-bottom: 1rem; 
   }
   
   .info-box div p {
     margin: 0;
-    font-size: 2rem; /* Ajusta el tamaño del texto */
+    font-size: 2rem;
     font-weight: 500;
     letter-spacing: 0.1em;
   }
   
   .info-box div span {
-    font-size: 1rem; /* Ajusta el tamaño del texto */
+    font-size: 1rem; 
     font-weight: 300;
   }
   
   .info-box div span:nth-child(3) {
     font-weight: 500;
-    margin-right: 0.5rem; /* Ajusta el espacio entre los elementos */
+    margin-right: 0.5rem; 
   }
   
   .info-box:hover {
