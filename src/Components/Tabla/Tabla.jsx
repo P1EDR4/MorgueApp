@@ -19,7 +19,7 @@ const Tabla = () => {
   const [modifyData, setModifyData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
 
   const fetchData = async () => {
     try {
