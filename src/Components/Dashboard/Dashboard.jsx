@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Clock from './Clock'; // Importa el componente Clock
+import Clock from './Clock';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
         <p>Total de información: {totalInfo}</p>
         <p>Información eliminada: {deletedInfo}</p>
       </div>
-      <Clock /> {/* Agrega el componente Clock aquí */}
+      <Clock />
     </div>
   );
 };

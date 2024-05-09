@@ -1,6 +1,7 @@
 import React from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
+import { Navigate } from 'react-router-dom'; 
 
 export class LoginForm extends React.Component {
   constructor(props){
@@ -8,7 +9,9 @@ export class LoginForm extends React.Component {
     this.state = {
       username: '',
       password: '',
-      loading: false // Agrega un estado para manejar la carga
+      loading: false, 
+      error: null,
+      loggedIn: false 
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,12 +19,10 @@ export class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    // Agrega la clase cuando el componente se monta
     document.body.classList.add('login-background');
   }
 
   componentWillUnmount() {
-    // Remueve la clase cuando el componente se desmonta
     document.body.classList.remove('login-background');
   }
 
@@ -35,24 +36,41 @@ export class LoginForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ loading: true }, () => {
-      setTimeout(() => {
-        this.validateForm();
-        this.setState({ loading: false });
-      }, 5000); // Tiempo animacion
+    const { username, password } = this.state;
+    this.setState({ loading: true, error: null }, () => {
+      fetch('https://api-morgue-app3.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombreusuario: username, password: password })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Credenciales incorrectas');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data); 
+        setTimeout(() => { 
+          this.setState({ loading: false, loggedIn: true }); 
+          this.props.onLogin(); 
+        }, 5000); 
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.setState({ loading: false, error: error.message });
+      });
     });
   }
-
-  validateForm() {
-    if(this.state.username === "admin" && this.state.password === "admin"){
-      this.props.onLogin();
-    }
-    else{
-      alert("Las credenciales no son válidas");
-    }
-  }
-
+  
   render() {
+ 
+    if (this.state.loggedIn) {
+      return <Navigate to="/Dashboard" />;
+    }
+
     return (
       <div className='wrapper'>
           <form onSubmit={this.handleSubmit}>
@@ -88,6 +106,9 @@ export class LoginForm extends React.Component {
                 <div className="hourglassGlass"></div>
               </div>
             </div>
+          )}
+          {this.state.error && (
+            <div className="error">{this.state.error}</div>
           )}
       </div>
     );

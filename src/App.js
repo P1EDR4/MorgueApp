@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'; // Importa BrowserRouter
 import LoginForm from './Components/LoginForm/LoginForm';
 import Rutas from './routes/Rutas';
 
@@ -23,12 +24,17 @@ function App() {
   };
 
   return (
-    isAuth ? (
-      <Rutas onLogout={handleLogout} />
-    ) : (
-      <LoginForm onLogin={handleLogin} />
-    )
+    <Router> 
+      <div>
+        {isAuth ? (
+          <Rutas isAuth={isAuth} onLogout={handleLogout} />
+        ) : (
+          <LoginForm onLogin={handleLogin} />
+        )}
+      </div>
+    </Router>
   );
 }
 
 export default App;
+
