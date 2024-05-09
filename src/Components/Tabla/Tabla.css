@@ -86,17 +86,17 @@ body.tabla-background {
 .tabla-icon {
   position: absolute;
   left: 1rem;
-  fill: #000000;
+  fill: #ffffff;
   width: 1rem;
   height: 1rem;
 }
 .icon-left,
 .icon-right {
   font-size: 30px; 
-  color: #000000;
+  color: #ffffff;
 }
 .page-info {
   font-size: 18px;
-  color: #000000; 
+  color: #ffffff; 
   text-align: right;
 }
