@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Clock from './Clock';
 import './Dashboard.css';
+import Clock from './Clock';
 
 const Dashboard = () => {
   const [totalInfo, setTotalInfo] = useState(0);
-  const [deletedInfo, setDeletedInfo] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,21 +12,33 @@ const Dashboard = () => {
         const response = await axios.get('https://api-morgueapp.onrender.com/info');
         const data = response.data;
         setTotalInfo(data.totalInfo);
-        setDeletedInfo(data.deletedInfo);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
+
+    return () => {
+      document.body.classList.remove('dashboard-background');
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.add('dashboard-background');
+
+    return () => {
+      document.body.classList.remove('dashboard-background');
+    };
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <h2>Bienvenido a Morgue App</h2>
-      <div>
+    <div className="container">
+      <div className="info-box">
+        <span className="title">Bienvenido a MorgueApp</span>
+        <div>
+        </div>
         <p>Total de información: {totalInfo}</p>
-        <p>Información eliminada: {deletedInfo}</p>
       </div>
       <Clock />
     </div>
@@ -35,4 +46,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-

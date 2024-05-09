@@ -43,8 +43,8 @@ td {
   padding: 10px;
 }
 
-body {
-  background-image: url('./Fondo2.JPG');
+body.tabla-background {
+  background-image: url('paisaje-montanas-blanco-negro.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }

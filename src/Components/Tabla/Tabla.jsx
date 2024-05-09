@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GoTriangleLeft, GoTriangleRight } from 'react-icons/go';
 import './Tabla.css';
+import Clock from '../Dashboard/Clock';
+
 
 const Tabla = () => {
   const [data, setData] = useState([]);
@@ -17,7 +19,7 @@ const Tabla = () => {
   const [modifyData, setModifyData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const itemsPerPage = 8;
+  const itemsPerPage = 6;
 
   const fetchData = async () => {
     try {
@@ -30,6 +32,16 @@ const Tabla = () => {
 
   useEffect(() => {
     fetchData();
+  }, []);
+
+  // Agregar fondo
+  useEffect(() => {
+    document.body.classList.add('tabla-background');
+
+    // Quitar fondo cuando se cambia
+    return () => {
+      document.body.classList.remove('tabla-background');
+    };
   }, []);
 
   const handleChange = e => {
@@ -57,7 +69,7 @@ const Tabla = () => {
         await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, formData);
         setModifyData(null);
       } else {
-        await axios.post('https://api-morgueapp.onrender.com/', formData);
+        await axios.post('https://api-morgueapp.onrender.com', formData);
       }
       setFormData({
         nombre: '',
@@ -212,6 +224,7 @@ const Tabla = () => {
           <button type="submit">Agregar Información</button>
         </form>
       )}
+      <Clock /> {/* Muestra el reloj aquí */}
       <table>
         <thead>
           <tr>

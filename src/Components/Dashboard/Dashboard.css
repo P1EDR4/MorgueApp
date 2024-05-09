@@ -1,0 +1,92 @@
+body.dashboard-background {
+    background-image: url('Fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.info-container {
+    color: white;
+    position: relative;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+  }
+  
+  .info-container::before,
+  .info-container::after {
+    content: "";
+    background-color: #fab5704c;
+    position: absolute;
+  }
+  
+  .info-container::before {
+    border-radius: 50%;
+    width: 10rem; /* Ajusta el tamaño del círculo */
+    height: 10rem; /* Ajusta el tamaño del círculo */
+    top: 25%; /* Ajusta la posición vertical del círculo */
+    right: 5%; /* Ajusta la posición horizontal del círculo */
+  }
+  
+  .info-container::after {
+    content: "";
+    position: absolute;
+    height: 5rem; /* Ajusta la altura del rectángulo */
+    top: 6%; /* Ajusta la posición vertical del rectángulo */
+    right: 3%; /* Ajusta la posición horizontal del rectángulo */
+    border: 1px solid;
+  }
+  
+  .info-box {
+    width: 24em; /* Ajusta el ancho del contenedor */
+    height: 25em; /* Ajusta la altura del contenedor */
+    padding: 2rem; /* Ajusta el espaciado interno */
+    background-color: rgba(255, 255, 255, 0.074);
+    border: 1px solid rgba(255, 255, 255, 0.222);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem; /* Ajusta el radio de borde */
+    transition: all ease 0.3s;
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .info-box .title {
+    font-size: 3rem; /* Ajusta el tamaño del título */
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  
+  .info-box div strong {
+    display: block;
+    margin-bottom: 1rem; /* Ajusta el espacio después de cada elemento */
+  }
+  
+  .info-box div p {
+    margin: 0;
+    font-size: 2rem; /* Ajusta el tamaño del texto */
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  
+  .info-box div span {
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+    font-weight: 300;
+  }
+  
+  .info-box div span:nth-child(3) {
+    font-weight: 500;
+    margin-right: 0.5rem; /* Ajusta el espacio entre los elementos */
+  }
+  
+  .info-box:hover {
+    box-shadow: 0px 0px 20px 1px #ffbb763f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+  }
+  
