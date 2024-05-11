@@ -7,12 +7,18 @@ const Clock = () => {
   const [day, setDay] = useState('');
   const [date, setDate] = useState('');
 
+  // Función para obtener el periodo (AM o PM)
+  const getPeriod = () => {
+    const currentDate = new Date();
+    return currentDate.getHours() >= 12 ? 'PM' : 'AM';
+  };
+
   useEffect(() => {
     const updateTime = () => {
       const currentDate = new Date();
       const hours = currentDate.getHours() % 12 || 12; // Formato de 12 horas
       const minutes = currentDate.getMinutes();
-      const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM'; // Determinar si es AM o PM
+      const newPeriod = getPeriod(); // Utilizamos la función para obtener el periodo
       const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
       setTime(formattedTime);
       setPeriod(newPeriod);

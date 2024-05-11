@@ -219,9 +219,10 @@ const Tabla = () => {
             type="text"
             name="hora"
             placeholder="Hora de entrada (automático)"
-            value={`${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}`}
+            value={`${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`}
             disabled
           />
+
           <button type="submit">Agregar Información</button>
         </form>
       )}
