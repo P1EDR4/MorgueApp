@@ -60,17 +60,11 @@ const Tabla = () => {
     }
   
     try {
-      const hours = Clock.getHours();
-      const minutes = Clock.getMinutes();
-      const period = hours >= 12 ? 'PM' : 'AM';
-  
-      const formattedHour = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${period}`;
-  
       if (modifyData) {
-        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: formattedHour });
+        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
         setModifyData(null);
       } else {
-        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: formattedHour });
+        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
       }
       setFormData({
         nombre: '',
@@ -219,7 +213,7 @@ const Tabla = () => {
             type="text"
             name="hora"
             placeholder="Hora de entrada (automático)"
-            value={`${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`}
+            value={`${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}`}
             disabled
           />
 
