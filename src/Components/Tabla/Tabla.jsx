@@ -4,15 +4,13 @@ import { GoTriangleLeft, GoTriangleRight } from 'react-icons/go';
 import './Tabla.css';
 import Clock from '../Dashboard/Clock';
 
-
 const Tabla = () => {
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
     nombre: '',
     apellidos: '',
     sexo: '',
-    seña: '',
-    hora: '' // Eliminaremos este campo
+    seña: ''
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -63,13 +61,13 @@ const Tabla = () => {
       if (modifyData) {
         await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, {
           ...formData,
-          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${period}, ${Clock.getDay()}, ${Clock.getDate()}`
+          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getDay()}, ${Clock.getDate()}`
         });
         setModifyData(null);
       } else {
         await axios.post('https://api-morgueapp.onrender.com', {
           ...formData,
-          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${period}, ${Clock.getDay()}, ${Clock.getDate()}`
+          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getDay()}, ${Clock.getDate()}`
         });
       }
       setFormData({
@@ -213,20 +211,11 @@ const Tabla = () => {
             value={formData.seña}
             onChange={handleChange}
           />
-          {/* Eliminamos el campo de entrada de hora y lo reemplazamos con la hora actual */}
-          <input
-            type="text"
-            name="hora"
-            placeholder="Hora de entrada (automático)"
-            value={`${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}`}
-            disabled
-          />
-
-
+          {/* Eliminamos el campo de entrada de hora y lo reemplazamos con el componente Clock */}
+          <Clock />
           <button type="submit">Agregar Información</button>
         </form>
       )}
-      <Clock />
       <table>
         <thead>
           <tr>

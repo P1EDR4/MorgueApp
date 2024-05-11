@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './Clock.css';
 
+
 const Clock = () => {
   const [time, setTime] = useState('');
   const [period, setPeriod] = useState('');
-  const [day, setDay] = useState('');
-  const [date, setDate] = useState('');
 
   useEffect(() => {
     const updateTime = () => {
       const currentDate = new Date();
-      const hours = currentDate.getHours() % 12 || 12; // Formato de 12 horas
+      const hours = currentDate.getHours() % 12 || 12;
       const minutes = currentDate.getMinutes();
-      const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM'; // Determinar si es AM o PM
+      const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM';
       const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
       setTime(formattedTime);
       setPeriod(newPeriod);
-      setDay(currentDate.toLocaleString('es-ES', { weekday: 'long' }));
-      setDate(currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }));
     };
-
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
