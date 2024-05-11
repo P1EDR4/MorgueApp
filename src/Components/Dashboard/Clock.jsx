@@ -5,6 +5,8 @@ import './Clock.css';
 const Clock = () => {
   const [time, setTime] = useState('');
   const [period, setPeriod] = useState('');
+  const [day, setDay] = useState('');
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const updateTime = () => {
@@ -13,9 +15,12 @@ const Clock = () => {
       const minutes = currentDate.getMinutes();
       const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM';
       const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+      setDay(currentDate.toLocaleString('es-ES', { weekday: 'long' }));
+      setDate(currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }));
       setTime(formattedTime);
       setPeriod(newPeriod);
     };
+    
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
