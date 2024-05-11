@@ -85,8 +85,6 @@ const Tabla = () => {
     }
   };
   
-  
-
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
       setSelectedItems([...selectedItems, id]);
