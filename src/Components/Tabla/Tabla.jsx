@@ -4,6 +4,7 @@ import { GoTriangleLeft, GoTriangleRight } from 'react-icons/go';
 import './Tabla.css';
 import Clock from '../Dashboard/Clock';
 
+
 const Tabla = () => {
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
@@ -157,7 +158,6 @@ const Tabla = () => {
   return (
     <div>
       <div className="button-search-container">
-        <Clock />
         <div className="group">
           <svg viewBox="0 0 24 24" aria-hidden="true" className="tabla-icon">
             <g>
@@ -224,6 +224,7 @@ const Tabla = () => {
           <button type="submit">Agregar Información</button>
         </form>
       )}
+      <Clock /> {/* Muestra el reloj aquí */}
       <table>
         <thead>
           <tr>
