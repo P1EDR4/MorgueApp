@@ -53,18 +53,24 @@ const Tabla = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-
+  
     if (!formData.nombre || !formData.apellidos || !formData.sexo || !formData.seña) {
       alert("Los campos están vacíos. Por favor, complete todos los campos.");
       return; 
     }
-
+  
     try {
+      const hours = Clock.getHours();
+      const minutes = Clock.getMinutes();
+      const period = hours >= 12 ? 'PM' : 'AM';
+  
+      const formattedHour = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${period}`;
+  
       if (modifyData) {
-        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
+        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: formattedHour });
         setModifyData(null);
       } else {
-        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
+        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: formattedHour });
       }
       setFormData({
         nombre: '',
@@ -78,6 +84,7 @@ const Tabla = () => {
       console.error('Error al enviar los datos:', error);
     }
   };
+  
 
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
