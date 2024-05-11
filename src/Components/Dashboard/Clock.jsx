@@ -34,4 +34,25 @@ const Clock = () => {
   );
 };
 
+// Exportamos las funciones como propiedades
+Clock.getHours = () => {
+  const currentDate = new Date();
+  return currentDate.getHours() % 12 || 12;
+};
+
+Clock.getMinutes = () => {
+  const currentDate = new Date();
+  return currentDate.getMinutes();
+};
+
+Clock.getDay = () => {
+  const currentDate = new Date();
+  return currentDate.toLocaleString('es-ES', { weekday: 'long' });
+};
+
+Clock.getDate = () => {
+  const currentDate = new Date();
+  return currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' });
+};
+
 export default Clock;
