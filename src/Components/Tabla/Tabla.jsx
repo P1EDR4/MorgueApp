@@ -226,7 +226,7 @@ const Tabla = () => {
           <button type="submit">Agregar Información</button>
         </form>
       )}
-      <Clock period={period} />
+      <Clock />
       <table>
         <thead>
           <tr>
