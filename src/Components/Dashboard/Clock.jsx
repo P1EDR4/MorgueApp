@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Clock.css';
 
-const Clock = () => {
+const Clock = ({ period }) => {
   const [time, setTime] = useState('');
-  const [period, setPeriod] = useState('');
   const [day, setDay] = useState('');
   const [date, setDate] = useState('');
 
@@ -15,7 +14,6 @@ const Clock = () => {
       const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM'; // Determinar si es AM o PM
       const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
       setTime(formattedTime);
-      setPeriod(newPeriod);
       setDay(currentDate.toLocaleString('es-ES', { weekday: 'long' }));
       setDate(currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }));
     };
