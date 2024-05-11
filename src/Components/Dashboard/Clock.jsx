@@ -20,7 +20,7 @@ const Clock = () => {
       setTime(formattedTime);
       setPeriod(newPeriod);
     };
-    
+
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
