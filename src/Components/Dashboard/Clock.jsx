@@ -3,7 +3,6 @@ import './Clock.css';
 
 const Clock = () => {
   const [time, setTime] = useState('');
-  const [period, setPeriod] = useState('');
   const [day, setDay] = useState('');
   const [date, setDate] = useState('');
 
@@ -17,6 +16,8 @@ const Clock = () => {
       setDate(currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }));
       setTime(formattedTime);
     };
+
+
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
