@@ -10,16 +10,13 @@ const Clock = () => {
   useEffect(() => {
     const updateTime = () => {
       const currentDate = new Date();
-      const hours = currentDate.getHours() % 12 || 12; // Formato de 12 horas
+      const hours = currentDate.getHours();
       const minutes = currentDate.getMinutes();
-      const newPeriod = currentDate.getHours() >= 12 ? 'PM' : 'AM'; // Determinar si es AM o PM
-      const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
-      setTime(formattedTime);
-      setPeriod(newPeriod);
+      const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
       setDay(currentDate.toLocaleString('es-ES', { weekday: 'long' }));
       setDate(currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }));
+      setTime(formattedTime);
     };
-
     const interval = setInterval(updateTime, 1000);
 
     return () => clearInterval(interval);
