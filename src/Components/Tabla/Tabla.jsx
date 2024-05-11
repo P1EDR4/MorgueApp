@@ -216,12 +216,12 @@ const Tabla = () => {
           />
           {/* Eliminamos el campo de entrada de hora y lo reemplazamos con la hora actual */}
           <input
-  type="text"
-  name="hora"
-  placeholder="Hora de entrada (automático)"
-  value={`${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`}
-  disabled
-/>
+            type="text"
+            name="hora"
+            placeholder="Hora de entrada (automático)"
+            value={`${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`}
+            disabled
+          />
 
 
           <button type="submit">Agregar Información</button>
