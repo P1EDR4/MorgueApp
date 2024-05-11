@@ -12,7 +12,7 @@ const Tabla = () => {
     apellidos: '',
     sexo: '',
     seña: '',
-    hora: ''
+    hora: '' // Eliminaremos este campo
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -54,29 +54,23 @@ const Tabla = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!formData.nombre || !formData.apellidos || !formData.sexo || !formData.seña || !formData.hora) {
+    if (!formData.nombre || !formData.apellidos || !formData.sexo || !formData.seña) {
       alert("Los campos están vacíos. Por favor, complete todos los campos.");
-      return; 
-    }
-
-    if (!formData.hora.includes('am') && !formData.hora.includes('pm')) {
-      alert("Por favor, especifique si la hora es 'am' o 'pm'.");
       return; 
     }
 
     try {
       if (modifyData) {
-        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, formData);
+        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
         setModifyData(null);
       } else {
-        await axios.post('https://api-morgueapp.onrender.com', formData);
+        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
       }
       setFormData({
         nombre: '',
         apellidos: '',
         sexo: '',
-        seña: '',
-        hora: ''
+        seña: ''
       });
       setShowAddForm(false);
       fetchData();
@@ -121,8 +115,7 @@ const Tabla = () => {
         nombre: selectedItem.nombre,
         apellidos: selectedItem.apellidos,
         sexo: selectedItem.sexo,
-        seña: selectedItem.seña,
-        hora: selectedItem.hora
+        seña: selectedItem.seña
       });
       setModifyData(selectedItem);
       setShowAddForm(true);
@@ -214,12 +207,13 @@ const Tabla = () => {
             value={formData.seña}
             onChange={handleChange}
           />
+          {/* Eliminamos el campo de entrada de hora y lo reemplazamos con la hora actual */}
           <input
             type="text"
             name="hora"
-            placeholder="Hora de entrada (am/pm)"
-            value={formData.hora}
-            onChange={handleChange}
+            placeholder="Hora de entrada (automático)"
+            value={`${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}`}
+            disabled
           />
           <button type="submit">Agregar Información</button>
         </form>
