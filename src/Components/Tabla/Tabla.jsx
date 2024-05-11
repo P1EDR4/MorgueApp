@@ -63,13 +63,13 @@ const Tabla = () => {
       if (modifyData) {
         await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, {
           ...formData,
-          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`
+          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${period}, ${Clock.getDay()}, ${Clock.getDate()}`
         });
         setModifyData(null);
       } else {
         await axios.post('https://api-morgueapp.onrender.com', {
           ...formData,
-          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${Clock.getPeriod()}, ${Clock.getDay()}, ${Clock.getDate()}`
+          hora: `${Clock.getHours()}:${Clock.getMinutes()} ${period}, ${Clock.getDay()}, ${Clock.getDate()}`
         });
       }
       setFormData({
@@ -84,6 +84,7 @@ const Tabla = () => {
       console.error('Error al enviar los datos:', error);
     }
   };
+  
   
 
   const handleCheckboxChange = (e, id) => {
