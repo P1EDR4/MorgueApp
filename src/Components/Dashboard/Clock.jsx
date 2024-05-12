@@ -32,6 +32,7 @@ const Clock = () => {
   );
 };
 
+
 // Exportamos las funciones como propiedades
 Clock.getHours = () => {
   const currentDate = new Date();
