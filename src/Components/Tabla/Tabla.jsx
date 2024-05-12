@@ -58,11 +58,13 @@ const Tabla = () => {
     }
   
     try {
+      const currentDate = new Date();
+      const formattedHour = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
       if (modifyData) {
-        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
+        await axios.put(`https://api-morgueapp.onrender.com/${modifyData._id}`, { ...formData, hora: formattedHour, dia: currentDate.toLocaleString('es-ES', { weekday: 'long' }), fecha: currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }) });
         setModifyData(null);
       } else {
-        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: `${Clock.getHours()}:${Clock.getMinutes()}, ${Clock.getDay()}, ${Clock.getDate()}` });
+        await axios.post('https://api-morgueapp.onrender.com', { ...formData, hora: formattedHour, dia: currentDate.toLocaleString('es-ES', { weekday: 'long' }), fecha: currentDate.toLocaleString('es-ES', { month: 'long', day: 'numeric' }) });
       }
       setFormData({
         nombre: '',
@@ -75,8 +77,8 @@ const Tabla = () => {
     } catch (error) {
       console.error('Error al enviar los datos:', error);
     }
-  };
-  
+};
+
   const handleCheckboxChange = (e, id) => {
     if (e.target.checked) {
       setSelectedItems([...selectedItems, id]);
