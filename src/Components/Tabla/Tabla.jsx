@@ -227,7 +227,7 @@ const Tabla = () => {
             <th>Apellidos</th>
             <th>Sexo</th>
             <th>Seña particular</th>
-            <th>Hora/Fecha de entrada</th>
+            <th>Fecha/Hora de entrada</th>
           </tr>
         </thead>
         <tbody>
