@@ -60,12 +60,12 @@ const Tabla = () => {
     try {
       const currentDate = new Date();
       const formattedDateTime = currentDate.toLocaleString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false ,
         weekday: 'long',
         month: 'long',
         day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false // 24-hour format
       });
   
       if (modifyData) {
